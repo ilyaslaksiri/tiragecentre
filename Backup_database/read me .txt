@@ -1,0 +1,2 @@
+Une copie du backup est installée sur le disque dure externe chemin :
+Archive\Backup TirageCentre DB
