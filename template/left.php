@@ -41,7 +41,7 @@
 		</ul>
 	
 		
-		<?php if($_SESSION["user"]=="admin"){ ?>
+		<?php if($_SESSION["access_level"]=="admin"){ ?>
 		<h3>Sauvegardes</h3>
 		<ul class="toggle">
 			<li class="icn_folder"><a href="BackupCode/backup.php">Sauvegarder</a></li>
@@ -52,7 +52,7 @@
 		
 		<h3>Admin</h3>
 		<ul class="toggle">
-		<?php if($_SESSION["user"]=="admin"){ ?>
+		<?php if($_SESSION["access_level"]=="admin"){ ?>
 			<li class="icn_settings"><a href="graphique_CA_loader.php">Graphique C.A</a></li>
 		<?php } ?>	
 			<li class="icn_security"><a href="ajouter_frs.php">Nouveau fournisseur</a></li>
@@ -60,11 +60,25 @@
 			<li class="icn_security"><a href="registre_facture_frs.php">Registre Fournisseurs</a></li>
 			<li class="icn_security"><a href="list_frs_bc.php">Bon de commande</a></li>
 			<li class="icn_jump_back"><a href="print.php">Comptabilit&eacute;</a></li>
-
 		</ul>
-	
+		<h3>Gestion des utilisateurs</h3>
+		<ul class="toggle">
+		<?php if($_SESSION["access_level"]=="admin"){ ?>
+			<li class="icn_settings"><a href="ajouter_user.php">Ajouter utilisateur</a></li>
+			<li class="icn_settings"><a href="list_users.php">Liste des utilisateurs</a></li>
+		<?php } ?>	
 		
-		<?php if($_SESSION["user"]=="user"){ ?>
+		</ul>
+		</ul>
+		<h3>Registre des Congés</h3>
+		<ul class="toggle">
+		<?php if($_SESSION["access_level"]=="admin"){ ?>
+			<li class="icn_settings"><a href="demande_conge.php">Demande de congé</a></li>
+		<?php } ?>	
+			<li class="icn_security"><a href="imprimer_attestation_conge.php">Attestation de congé</a></li>
+		</ul>
+		
+		<?php if($_SESSION["access_level"]=="user"){ ?>
 		
 		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 		<?php } ?>

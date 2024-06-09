@@ -68,7 +68,7 @@
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>Connceté :  <?php echo $_SESSION["user"]; ?> | <?php echo $_SESSION["annee"]; ?></p>
+			<p>Bonjour,  <?php echo $_SESSION["prenom"]; ?> | <a href="ajouter_user.php?id_user=<?php echo $_SESSION["id_user"]; ?>">Mon profil</a></p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
