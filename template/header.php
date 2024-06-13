@@ -1,7 +1,11 @@
 <!doctype html>
 <!doctype html>
 <html lang="en">
-<?php session_start();?>
+
+<?php session_start(); 
+	$access_levels = isset($_SESSION["access_level"]) ? 
+		explode(',', $_SESSION["access_level"]) : array();
+?>
 <head>
 	<link rel="icon" type="image/png" href="images/logo-icon.png" />
 	<meta charset="utf-8"/>
@@ -68,7 +72,20 @@
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>Connceté :  <?php echo $_SESSION["user"]; ?> | <?php echo $_SESSION["annee"]; ?></p>
+			
+			<?php
+			// Vérification de l'accès selon le niveau d'utilisateur
+			if (in_array('admin', $access_levels) || in_array('adminRH', $access_levels)) {
+				?>
+				<p>Bonjour, <?php echo $_SESSION["prenom"]; ?> | <a href="ajouter_user.php?id_user=<?php echo $_SESSION["id_user"]; ?>">Mon profil</a></p>
+				<?php
+			} else {
+				?>
+				<p>Bonjour, <?php echo $_SESSION["prenom"]; ?></p>
+				<?php
+			}
+			?>
+			
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
