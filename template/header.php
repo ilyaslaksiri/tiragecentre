@@ -1,7 +1,9 @@
 <!doctype html>
 <!doctype html>
 <html lang="en">
-<?php session_start();?>
+
+<?php session_start(); ?>
+
 <head>
 	<link rel="icon" type="image/png" href="images/logo-icon.png" />
 	<meta charset="utf-8"/>
@@ -141,3 +143,7 @@ fclose($fp);
 return $annee;
 }
 ?> 
+<?php
+	$access_levels = isset($_SESSION["access_level"]) ? 
+		explode(',', $_SESSION["access_level"]) : array();
+?>

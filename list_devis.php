@@ -74,7 +74,7 @@ $ligne=mysql_fetch_array($result);
 			<th>Total TTC</th>
 			<th>Calculable</th>
 			<th>Modifier</th>
-			<?php if($_SESSION["user"]=="admin"){ ?>
+			<?php if(in_array('devis_mod', $access_levels)){ ?>
 			<th>Detail</th>
 			<?php } ?>
 			<th>Facturer</th>
@@ -103,15 +103,18 @@ while ($ligne = mysql_fetch_array($requete2)) {
 		<td align=center><a href=modifier_devis.php?id_devis=$ligne[ID_DEVIS] title=Modifier><img src=images/icn_edit.png></a></td>
 		";
 	
-	 if("$_SESSION[user]"== "admin"){
+		if(in_array('devis_mod', $access_levels)){
 		print "
 		
 		<td align=center><a href=# OnClick=\"window.open('imprimer_devis.php?id_devis=$ligne[ID_DEVIS]','width=400','height=630','left=20','top=30');\"  title=Voir><img src=images/pdf.gif /></a></td>
 		";}
 		
-		
-		print "<td align=center><a href=facturer_devis.php?id_client=$id_client&id_devis=$ligne[ID_DEVIS]>facturer</a></td>
-				</tr> ";  
+		if(in_array('facture_mod', $access_levels)){
+			print "<td align=center><a href=facturer_devis.php?id_client=$id_client&id_devis=$ligne[ID_DEVIS]>facturer</a></td>
+				</tr> ";  }
+		else{
+			print"<td align=center>-</td>";
+		}
 				
 				
 }

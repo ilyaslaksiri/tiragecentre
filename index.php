@@ -76,12 +76,11 @@ if (isset($_POST["user"]) && isset($_POST["password"])) {
         $_SESSION["login"] = $row["LOGIN_USER"];
         $_SESSION["access_level"] = $row["ACCESS_LEVEL_USER"];
         $_SESSION["annee"] = $_POST["exe"];
-
-        if ($row["ACCESS_LEVEL_USER"] == "admin") {
+        //if ($row["ACCESS_LEVEL_USER"] == "admin") {
             redirige("list_client.php");
-        } else {
-            redirige("list_client_bl.php");
-        }
+        //} else {
+          //  redirige("list_client_bl.php");
+        //}
     } else {
         echo "<center>Login ou mot de passe incorrectes !</center>";
     }

@@ -62,7 +62,7 @@ include "template/left.php";
 			<th>Etat</th>
 			<th>Mode reglement</th>
 			<th>Date Reglement</th>
-			<?php if($_SESSION["user"]=="admin"){ ?>
+			<?php if(in_array('facture_mod', $access_levels)){ ?>
 			<th>Detail</th>
 			<?php } ?>
 	</thead>
@@ -167,7 +167,7 @@ while ($ligne = mysql_fetch_array($requete2)) {
 		<td align=center>".$ligne["DATE_PAYEMENT"]."</td>
 	";
 	
-	 if("$_SESSION[user]"== "admin"){
+	if(in_array('facture_mod', $access_levels)){
 		print "<td align=center><a href=# OnClick=\"window.open('imprimer_facture.php?id_facture=$ligne[ID_FACTURE]','width=400','height=630','left=20','top=30');\"  title=Voir><img src=images/pdf.gif /></a></td>
 	 ";}
    print "</tr> ";  

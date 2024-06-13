@@ -62,7 +62,7 @@ include "template/left.php";
 			<th>Etat</th>
 			<th>Mode reglement</th>
 			<th>Date Reglement</th>
-			<?php if($_SESSION["user"]=="admin"){ ?>
+			<?php if(in_array('facture_mod', $access_levels)){ ?>
 			<th>Detail</th>
 			<?php } ?>
 	</thead>

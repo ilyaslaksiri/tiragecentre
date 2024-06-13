@@ -74,7 +74,7 @@ $ligne=mysql_fetch_array($result);
 			<th>Total TTC</th>
 			<th>Etat</th>
 			<th>Modifier</th>
-			<?php if($_SESSION["user"]=="admin"){ ?>
+			<?php if(in_array('clients_mod', $access_levels)||in_array('facture_mod', $access_levels)){ ?>
 			<th>Detail</th>
 			<?php } ?>
 			
@@ -101,8 +101,9 @@ while ($ligne = mysql_fetch_array($requete2)) {
 		
 		<td align=center><a href=modifier_facture.php?id_facture=$ligne[ID_FACTURE] title=Modifier><img src=images/icn_edit.png></a></td>
 		";
-	
-	 if("$_SESSION[user]"== "admin"){
+		 
+		if(in_array('clients_mod', $access_levels)||
+		in_array('facture_mod', $access_levels)){
 		print "
 		<td align=center><a href=# OnClick=\"window.open('imprimer_facture.php?id_facture=$ligne[ID_FACTURE]','width=400','height=630','left=20','top=30');\"  title=Voir><img src=images/pdf.gif /></a></td>
 		 ";}
