@@ -59,10 +59,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <script>
     // Liste des jours fériés
     var holidays = [
-            "2024-01-01", // Nouvel An
-            "2024-04-21", // Fête nationale
-            "2024-06-13", // Fête du Travail
-            // Ajoutez d'autres jours fériés ici
+            "2024-01-01", // Nouvel an
+            "2024-01-11", // Manifeste de l'indépendance
+            "2024-01-14", // Nouvel an amazigh
+            "2024-05-01", // Fête du travail
+            "2024-07-30", // Fête du trône
+            "2024-08-14", // Libération de Oued EDDAHAB
+            "2024-08-20", // Révolution du Roi et du peuple
+            "2024-08-21", // Fête de la jeunesse
+            "2024-11-06", // La marche verte
+            "2024-11-18", // Fête d'independance
+            //Fêtes religieuses 
+            "2024-06-17", //Aid al adha 1
+            "2024-06-18", //Aid al adha 2
         ];
 
     $(document).ready(function() {
