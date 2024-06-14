@@ -150,7 +150,7 @@ if (isset($_POST['submit'])) {
     // Exécuter la requête
     if (mysqli_query($connexion, $requete)) {
         // Mettre à jour la session après la requête réussie
-        $_SESSION["access_level"] = $access_level_user;
+        //$_SESSION["access_level"] = $access_level_user;
         echo "<script type='text/javascript'>
                 window.location.href = 'list_users.php';
               </script>";
