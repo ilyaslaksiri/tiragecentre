@@ -55,9 +55,10 @@
     <?php } ?>
 
     <?php if (in_array('conge_mod', $access_levels)) { ?>
-        <h3>Congés</h3>
+        <h3>Congés / Documents</h3>
         <ul class="toggle">
             <li class="icn_settings"><a href="list_conge.php">Liste des congés</a></li>
+			<li class="icn_settings"><a href="list_attestation_travail.php">Attestations de travail</a></li>
         </ul>
     <?php } ?>
 
