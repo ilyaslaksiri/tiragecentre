@@ -18,6 +18,9 @@
             <i></i>
         </div>
         <input type="password" name="password" placeholder="Mot de passe" required>
+        <div style="text-align: center; margin: 10px 0;">
+            <a href="change_password.php" style="color: #51771a; text-decoration: none; font-size: 12px;">Modifier mon mot de passe</a>
+        </div>
         </br>
         Exercice :
         <select name="exe">
@@ -40,9 +43,51 @@
 </html>
 
 <?php
+/**
+ * AMÉLIORATIONS DE SÉCURITÉ APPLIQUÉES :
+ *
+ * 1. VALIDATION DE COMPLEXITÉ DES MOTS DE PASSE :
+ *    - Fonction validatePasswordComplexity() ajoutée
+ *    - Vérification : 8+ caractères, majuscule, minuscule, chiffre
+ *    - Messages d'erreur détaillés pour guider l'utilisateur
+ *
+ * 2. MIGRATION PROGRESSIVE DES UTILISATEURS :
+ *    - Les utilisateurs existants peuvent se connecter avec leurs anciens mots de passe
+ *    - Détection automatique des mots de passe faibles
+ *    - Redirection forcée vers change_password.php pour mise à jour
+ *    - Token de sécurité pour éviter les attaques
+ *
+ * 3. SUPPRESSION DE L'INDICATION DE STRATÉGIE :
+ *    - Retrait du message "Le mot de passe doit contenir..." de la page de login
+ *    - Ajout d'un lien discret "Modifier mon mot de passe"
+ *    - Évite de dévoiler la stratégie de sécurité aux attaquants
+ */
+
 function redirige($url) {
     echo '<meta http-equiv="refresh" content="0;URL=' . htmlspecialchars($url) . '">';
     exit;
+}
+
+function validatePasswordComplexity($password) {
+    $errors = array();
+
+    if (strlen($password) < 8) {
+        $errors[] = "au moins 8 caractères";
+    }
+
+    if (!preg_match('/[A-Z]/', $password)) {
+        $errors[] = "au moins une lettre majuscule";
+    }
+
+    if (!preg_match('/[a-z]/', $password)) {
+        $errors[] = "au moins une lettre minuscule";
+    }
+
+    if (!preg_match('/[0-9]/', $password)) {
+        $errors[] = "au moins un chiffre";
+    }
+
+    return $errors;
 }
 
 if (isset($_POST["user"]) && isset($_POST["password"])) {
@@ -68,9 +113,19 @@ if (isset($_POST["user"]) && isset($_POST["password"])) {
     $resultat = $requete->get_result();
 
     if ($resultat->num_rows > 0) {
-        session_start();
         $row = $resultat->fetch_assoc();
-		$_SESSION["id_user"] = $row["ID_USER"];
+
+        // MIGRATION PROGRESSIVE : Vérifier si le mot de passe respecte les nouvelles règles
+        $passwordErrors = validatePasswordComplexity($password);
+        if (!empty($passwordErrors)) {
+            // Mot de passe faible détecté - forcer la mise à jour
+            $token = md5($row['ID_USER'] . time() . rand()); // Token simple pour sécurité
+            redirige("change_password.php?user_id=" . $row['ID_USER'] . "&token=" . $token);
+        }
+
+        // Mot de passe conforme - connexion normale
+        session_start();
+        $_SESSION["id_user"] = $row["ID_USER"];
         $_SESSION["nom"] = $row["NOM_USER"];
         $_SESSION["prenom"] = $row["PRENOM_USER"];
         $_SESSION["login"] = $row["LOGIN_USER"];

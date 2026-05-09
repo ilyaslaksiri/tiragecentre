@@ -61,6 +61,18 @@ body {
 .wrap input[type="text"] {
 	border-radius: 7px 7px 0px 0px ;
 }
+.wrap input[type="password"].round-top,
+.wrap input[type="text"].round-top {
+	border-radius: 7px 7px 0px 0px ;
+}
+.wrap input[type="password"].round-none,
+.wrap input[type="text"].round-none {
+	border-radius: 0px 0px 0px 0px ;
+}
+.wrap input[type="password"].round-bottom,
+.wrap input[type="text"].round-bottom {
+	border-radius: 0px 0px 7px 7px ;
+}
 .wrap input[type="password"] {
 	border-radius: 0px 0px 7px 7px ;
 }
